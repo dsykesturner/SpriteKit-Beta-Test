@@ -47,7 +47,7 @@ class GameScene: SKScene {
     func touchUp(atPoint pos : CGPoint) {
         
         let ball = SKShapeNode(circleOfRadius: 25)
-        ball.position = CGPoint(x: self.size.width/2, y: self.size.width/2)
+        ball.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         ball.physicsBody = SKPhysicsBody(circleOfRadius: 25)
         ball.physicsBody?.categoryBitMask = pc.ball
         ball.physicsBody?.collisionBitMask = pc.house
