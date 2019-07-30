@@ -17,29 +17,10 @@ struct pc {
 
 class GameScene: SKScene {
     
-    private var spinnyNode : SKShapeNode?
-    
     override func didMove(to view: SKView) {
         
         // Setup the contact delegate
         self.physicsWorld.contactDelegate = self
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.physicsBody = SKPhysicsBody(circleOfRadius: spinnyNode.frame.size.width/2)
-            spinnyNode.physicsBody?.categoryBitMask = pc.ball
-            spinnyNode.physicsBody?.collisionBitMask = pc.house
-            spinnyNode.physicsBody?.contactTestBitMask = pc.house
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
         
         // Create a sprite node to interact with the shape node
         let width = 100.0
@@ -58,27 +39,12 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.green
-//            self.addChild(n)
-//        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.blue
-//            self.addChild(n)
-//        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.red
-//            self.addChild(n)
-//        }
         
         let ball = SKShapeNode(circleOfRadius: 25)
         ball.position = CGPoint(x: self.size.width/2, y: self.size.width/2)
@@ -86,6 +52,7 @@ class GameScene: SKScene {
         ball.physicsBody?.categoryBitMask = pc.ball
         ball.physicsBody?.collisionBitMask = pc.house
         ball.physicsBody?.contactTestBitMask = pc.house
+        
         addChild(ball)
     }
     
